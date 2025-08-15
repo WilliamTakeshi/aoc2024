@@ -8,5 +8,5 @@ fn main() {
     let _day01_part2 = day01::part2();
 
     let _day02_part1 = day02::part1();
-    // let _day02_part2 = day02::part2();
+    let _day02_part2 = day02::part2();
 }
