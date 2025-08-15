@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+use std::hash::Hash;
 use std::io::Read;
 
 pub fn part1() -> anyhow::Result<()> {
@@ -23,7 +25,34 @@ pub fn part1() -> anyhow::Result<()> {
     vec1.sort();
     vec2.sort();
 
-    let res: i64 = vec1.iter().zip(vec2).map(|(a, b)| (a-b).abs()).sum();
+    let res: i64 = vec1.iter().zip(vec2).map(|(a, b)| (a - b).abs()).sum();
+
+    println!("{}", res);
+
+    Ok(())
+}
+
+pub fn part2() -> anyhow::Result<()> {
+    let mut file = std::fs::File::open("./src/solutions/day01/input.txt")?;
+    let mut contents = String::new();
+
+    file.read_to_string(&mut contents)?;
+
+    let mut vec1 = Vec::new();
+    let mut hm2 = HashMap::new();
+
+    for line in contents.lines() {
+        let mut parts = line
+            .split(" ")
+            .map(|s| s.trim())
+            .filter(|s| !s.is_empty())
+            .map(|s| s.parse::<i64>().unwrap());
+        let (fst, snd) = (parts.next().unwrap(), parts.next().unwrap());
+        vec1.push(fst);
+        hm2.entry(snd).and_modify(|snd| *snd += 1).or_insert(1);
+    }
+
+    let res: i64 = vec1.iter().map(|&a| a * hm2.get(&a).unwrap_or(&0)).sum();
 
     println!("{}", res);
 
