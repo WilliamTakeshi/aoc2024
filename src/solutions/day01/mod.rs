@@ -1,8 +1,6 @@
 use std::collections::HashMap;
-use std::hash::Hash;
 use std::io::Read;
 
-use anyhow::Context;
 
 pub fn part1() -> anyhow::Result<()> {
     let mut file = std::fs::File::open("./src/solutions/day01/input.txt")?;
