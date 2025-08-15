@@ -2,6 +2,8 @@ use std::collections::HashMap;
 use std::hash::Hash;
 use std::io::Read;
 
+use anyhow::Context;
+
 pub fn part1() -> anyhow::Result<()> {
     let mut file = std::fs::File::open("./src/solutions/day01/input.txt")?;
     let mut contents = String::new();
@@ -13,9 +15,7 @@ pub fn part1() -> anyhow::Result<()> {
 
     for line in contents.lines() {
         let mut parts = line
-            .split(" ")
-            .map(|s| s.trim())
-            .filter(|s| !s.is_empty())
+            .split_whitespace()
             .map(|s| s.parse::<i64>().unwrap());
         let (fst, snd) = (parts.next().unwrap(), parts.next().unwrap());
         vec1.push(fst);
@@ -43,9 +43,7 @@ pub fn part2() -> anyhow::Result<()> {
 
     for line in contents.lines() {
         let mut parts = line
-            .split(" ")
-            .map(|s| s.trim())
-            .filter(|s| !s.is_empty())
+            .split_whitespace()
             .map(|s| s.parse::<i64>().unwrap());
         let (fst, snd) = (parts.next().unwrap(), parts.next().unwrap());
         vec1.push(fst);
